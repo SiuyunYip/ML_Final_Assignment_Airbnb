@@ -17,12 +17,13 @@ nltk.download('punkt')
 nltk.download('stopwords')
 stop_words = nltk.corpus.stopwords.words('english')
 stop_words.extend(['</br>'])
-reviews_path = 'data/reviews.csv'
-reviews = pd.read_csv(reviews_path, index_col=0, sep=',')
+
+reviews = pd.read_csv('data/reviews.csv', index_col=0, sep=',')
 # drop null rows
-# reviews = reviews.dropna()
-# print(reviews.isnull().sum())
-comment_list = [i for i in reviews['comments']]
+print(reviews.isnull().sum())
+reviews = reviews.dropna()
+
+comment_list = np.array(reviews['comments']).astype(str)
 
 
 def remove_punctuation(comment):
